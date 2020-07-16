@@ -27,6 +27,7 @@ print_info() {
 
 error_trap() {
   print_error "Something went wrong - see the errors above..."
+  exit 1
 }
 
 ################
