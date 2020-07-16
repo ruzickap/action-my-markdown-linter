@@ -2,7 +2,7 @@
 
 [![GitHub Marketplace](https://img.shields.io/badge/Marketplace-My%20Markdown%20Linter-blue.svg?colorA=24292e&colorB=0366d6&style=flat&longCache=true&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAM6wAADOsB5dZE0gAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAERSURBVCiRhZG/SsMxFEZPfsVJ61jbxaF0cRQRcRJ9hlYn30IHN/+9iquDCOIsblIrOjqKgy5aKoJQj4O3EEtbPwhJbr6Te28CmdSKeqzeqr0YbfVIrTBKakvtOl5dtTkK+v4HfA9PEyBFCY9AGVgCBLaBp1jPAyfAJ/AAdIEG0dNAiyP7+K1qIfMdonZic6+WJoBJvQlvuwDqcXadUuqPA1NKAlexbRTAIMvMOCjTbMwl1LtI/6KWJ5Q6rT6Ht1MA58AX8Apcqqt5r2qhrgAXQC3CZ6i1+KMd9TRu3MvA3aH/fFPnBodb6oe6HM8+lYHrGdRXW8M9bMZtPXUji69lmf5Cmamq7quNLFZXD9Rq7v0Bpc1o/tp0fisAAAAASUVORK5CYII=)](https://github.com/marketplace/actions/my-markdown-linter)
 [![license](https://img.shields.io/github/license/ruzickap/action-my-markdown-linter.svg)](https://github.com/ruzickap/action-my-markdown-linter/blob/master/LICENSE)
-[![release](https://img.shields.io/github/release/ruzickap/action-my-markdown-linter.svg)](https://github.com/ruzickap/action-markdown-linter/releases/latest)
+[![release](https://img.shields.io/github/release/ruzickap/action-my-markdown-linter.svg)](https://github.com/ruzickap/action-my-markdown-linter/releases/latest)
 [![GitHub release date](https://img.shields.io/github/release-date/ruzickap/action-my-markdown-linter.svg)](https://github.com/ruzickap/action-my-markdown-linter/releases)
 ![GitHub Actions status](https://github.com/ruzickap/action-my-markdown-linter/workflows/docker-image/badge.svg)
 [![Docker Hub Build Status](https://img.shields.io/docker/cloud/build/peru/my-markdown-linter.svg)](https://hub.docker.com/r/peru/my-markdown-linter)
@@ -14,6 +14,8 @@ and [fd](https://github.com/sharkdp/fd).
 See the basic GitHub Action example:
 
 ```yaml
+name: markdown_lint
+
 on:
   push:
 
@@ -74,6 +76,17 @@ jobs:
           search_paths: |
             check_dir_1/md_files/
             check_dir_2/markdown_files/
+
+      - name: Markdown Lint - check only 'docs' directory and exclude CHANGELOG.md
+        uses: ruzickap/action-my-markdown-linter@v1
+        with:
+          search_paths: |
+            docs/
+          exclude: |
+            CHANGELOG.md
+
+      - name: Markdown Lint - simple example
+        uses: ruzickap/action-my-markdown-linter@v1
 
       - name: Markdown Lint using pre-built container
         uses: docker://peru/my-markdown-linter@v1
