@@ -1,0 +1,38 @@
+name: markdown
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - '**.md'
+      - .github/workflows/markdown.yml
+      - .markdownlint.yml
+  push:
+    branches:
+      - master
+    paths:
+      - '**.md'
+      - .github/workflows/markdown.yml
+      - .markdownlint.yml
+
+jobs:
+  markdown_lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Wait for `v1` release of action-my-markdown-linter and use it instead of `master`
+      - name: Markdown Lint
+        uses: ruzickap/action-my-markdown-linter@master
+        with:
+          exclude: |
+            tests/
+            CHANGELOG.md
+
+  markdown-link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Link Checker
+        uses: gaurav-nelson/github-action-markdown-link-check@v1

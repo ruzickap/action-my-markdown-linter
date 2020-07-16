@@ -12,7 +12,7 @@ export DEBUG=${INPUT_DEBUG:-}
 export EXCLUDE=${INPUT_EXCLUDE:-}
 
 # Command line parameters for fd
-export FD_CMD_PARAMS="${INPUT_FD_CMD_PARAMS:- -0 --extension md --type f}"
+export FD_CMD_PARAMS="${INPUT_FD_CMD_PARAMS:- . -0 --extension md --type f --hidden --no-ignore}"
 
 # Set files or paths variable containing markdown files
 export SEARCH_PATHS=${INPUT_SEARCH_PATHS:-}
@@ -39,23 +39,21 @@ trap error_trap ERR
 
 IFS=' ' read -r -a FD_CMD_PARAMS <<< "$FD_CMD_PARAMS"
 
-if [ -n "${SEARCH_PATHS}" ] && [ -z "${INPUT_FD_CMD_PARAMS+x}" ]; then
-  for SEARCH_PATH in ${SEARCH_PATHS}; do
-    FD_CMD_PARAMS+=("--search-path" "${SEARCH_PATH}")
+if [ -n "${EXCLUDE}" ] && [ -z "${INPUT_FD_CMD_PARAMS}" ]; then
+  for EXCLUDED in ${EXCLUDE}; do
+    FD_CMD_PARAMS+=("--exclude" "${EXCLUDED}")
   done
 fi
 
-if [ -n "${EXCLUDE}" ] && [ -z "${INPUT_FD_CMD_PARAMS+x}" ]; then
-  for EXCLUDED in ${EXCLUDE}; do
-    FD_CMD_PARAMS+=("--exclude" "${EXCLUDED}")
+if [ -n "${SEARCH_PATHS}" ] && [ -z "${INPUT_FD_CMD_PARAMS}" ]; then
+  for SEARCH_PATH in ${SEARCH_PATHS}; do
+    FD_CMD_PARAMS+=("${SEARCH_PATH}")
   done
 fi
 
 declare -a MARKDOWNLINT_CMD_PARAMS
 if [ -n "${CONFIG_FILE}" ]; then
   MARKDOWNLINT_CMD_PARAMS+=("--config" "${CONFIG_FILE}")
-elif [ -f .markdownlint.yml ]; then
-  MARKDOWNLINT_CMD_PARAMS+=("--config" ".markdownlint.yml")
 fi
 
 print_info "Start checking..."
