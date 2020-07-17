@@ -9,7 +9,7 @@ branding:
   color: 'blue'
 inputs:
   config_file:
-    description: 'markdownlint config file'
+    description: 'markdownlint-cli config file'
   debug:
     description: 'Debug mode'
   exclude:
