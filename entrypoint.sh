@@ -40,16 +40,19 @@ trap error_trap ERR
 
 IFS=' ' read -r -a FD_CMD_PARAMS <<< "$FD_CMD_PARAMS"
 
-if [ -n "${EXCLUDE}" ] && [ -z "${INPUT_FD_CMD_PARAMS}" ]; then
-  for EXCLUDED in ${EXCLUDE}; do
-    FD_CMD_PARAMS+=("--exclude" "${EXCLUDED}")
-  done
-fi
+# Change FD_CMD_PARAMS variable only if INPUT_FD_CMD_PARAMS was not defined or is empty
+if [ -z "${INPUT_FD_CMD_PARAMS+x}" ] || [ -z "${INPUT_FD_CMD_PARAMS}" ]; then
+  if [ -n "${EXCLUDE}" ]; then
+    for EXCLUDED in ${EXCLUDE}; do
+      FD_CMD_PARAMS+=("--exclude" "${EXCLUDED}")
+    done
+  fi
 
-if [ -n "${SEARCH_PATHS}" ] && [ -z "${INPUT_FD_CMD_PARAMS}" ]; then
-  for SEARCH_PATH in ${SEARCH_PATHS}; do
-    FD_CMD_PARAMS+=("${SEARCH_PATH}")
-  done
+  if [ -n "${SEARCH_PATHS}" ]; then
+    for SEARCH_PATH in ${SEARCH_PATHS}; do
+      FD_CMD_PARAMS+=("${SEARCH_PATH}")
+    done
+  fi
 fi
 
 declare -a MARKDOWNLINT_CMD_PARAMS
