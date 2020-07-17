@@ -2,19 +2,19 @@
 
 set -euo pipefail
 
-# Config file for markdownlint
+# Config file for markdownlint-cli (it's using .markdownlint.json/.markdownlint.yaml/.markdownlint.yml by default)
 export CONFIG_FILE=${INPUT_CONFIG_FILE:-}
 
 # Debug variable - enable by setting non-empty value
 export DEBUG=${INPUT_DEBUG:-}
 
-# Exclude files or directoryes which should not be linted
+# Exclude files or directories which should not be linted
 export EXCLUDE=${INPUT_EXCLUDE:-}
 
-# Command line parameters for fd
+# Command line parameters for fd ("exclude" and "search_paths" parameters are ignored if this is set)
 export FD_CMD_PARAMS="${INPUT_FD_CMD_PARAMS:- . -0 --extension md --type f --hidden --no-ignore}"
 
-# Set files or paths variable containing markdown files
+# Files or paths which will be linted
 export SEARCH_PATHS=${INPUT_SEARCH_PATHS:-}
 
 print_error() {

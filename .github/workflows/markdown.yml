@@ -29,6 +29,13 @@ jobs:
             tests/
             CHANGELOG.md
 
+      - name: Markdown Lint using pre-built container
+        uses: docker://peru/my-markdown-linter
+        with:
+          exclude: |
+            tests/
+            CHANGELOG.md
+
   markdown-link-check:
     runs-on: ubuntu-latest
     steps:

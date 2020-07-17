@@ -1,6 +1,5 @@
 .git
 .github
-images
 tests
 .*.yaml
 .*.yml
