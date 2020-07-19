@@ -21,9 +21,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # Wait for `v1` release of action-my-markdown-linter and use it instead of `master`
       - name: Markdown Lint
-        uses: ruzickap/action-my-markdown-linter@master
+        uses: ruzickap/action-my-markdown-linter@v1
         with:
           exclude: |
             tests/
