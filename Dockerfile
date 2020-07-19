@@ -4,7 +4,7 @@ LABEL maintainer="Petr Ruzicka <petr.ruzicka@gmail.com>"
 LABEL repository="https://github.com/ruzickap/action-my-markdown-linter"
 LABEL homepage="https://github.com/ruzickap/action-my-markdown-linter"
 
-LABEL "com.github.actions.name"="My Markdown linter"
+LABEL "com.github.actions.name"="My Markdown Linter"
 LABEL "com.github.actions.description"="Lint Markdown files"
 LABEL "com.github.actions.icon"="list"
 LABEL "com.github.actions.color"="blue"
@@ -15,7 +15,7 @@ LABEL "com.github.actions.color"="blue"
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
 RUN set -eux && \
-    apk --update --no-cache add bash curl fd jq && \
+    apk --update --no-cache add bash fd && \
     if [ -n "${MARKDOWNLINT_CLI_VERSION+x}" ] ; then \
       npm install --global --production "markdownlint-cli@${MARKDOWNLINT_CLI_VERSION}" ; \
     else \
