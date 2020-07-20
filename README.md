@@ -127,3 +127,13 @@ Output:
 ```
 
 ## Examples
+
+The following links contains real examples of My Markdown Linter:
+
+* [https://github.com/ruzickap/k8s-harbor/blob/0d71cad7050758b7956ebddad48a3239ddb13037/.github/workflows/vuepress-build-check-deploy.yml#L30-L34](https://github.com/ruzickap/k8s-harbor/blob/0d71cad7050758b7956ebddad48a3239ddb13037/.github/workflows/vuepress-build-check-deploy.yml#L30-L34)
+
+  Go to "Actions -> vuepress-build-check-deploy -> markdownlint-check" in the repository
+
+* [https://github.com/ruzickap/action-my-markdown-linter/blob/9df2003a2c445df2718e2c1212c899a35158cffa/.github/workflows/tests.yml](https://github.com/ruzickap/action-my-markdown-linter/blob/9df2003a2c445df2718e2c1212c899a35158cffa/.github/workflows/tests.yml)
+
+  Go to "Actions -> tests -> test" in the repository
