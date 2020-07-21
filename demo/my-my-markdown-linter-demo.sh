@@ -61,7 +61,7 @@ pe 'cat tests/test-bad-mdfile/bad.md'
 p ''
 p '(There should be a new line after the header in the bad.md file)'
 p ''
-p "Let's exclude this file form beeing checked:"
+p "Let's exclude this file form being checked:"
 pe 'export INPUT_EXCLUDE="test-bad-mdfile/bad.md test1/CHANGELOG.md"'
 pe 'docker run --rm -t -e INPUT_SEARCH_PATHS -e INPUT_EXCLUDE -v "${PWD}:/mnt" peru/my-markdown-linter'
 

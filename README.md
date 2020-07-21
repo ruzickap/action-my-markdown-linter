@@ -128,7 +128,7 @@ Output:
 
 Demo:
 
-[![My Markdown Linter](https://asciinema.org/a/348706.svg)](https://asciinema.org/a/348706)
+[![My Markdown Linter](https://asciinema.org/a/348715.svg)](https://asciinema.org/a/348715)
 
 ## Examples
 
