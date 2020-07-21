@@ -35,6 +35,9 @@ export NO_WAIT=false
 #DEMO_PROMPT="${GREEN}➜ ${CYAN}\W "
 export DEMO_PROMPT="${GREEN}➜ ${CYAN}$ "
 
+# Aliases
+alias cat="bat -p --paging=never"
+
 # hide the evidence
 clear
 
@@ -53,7 +56,7 @@ sleep 3
 p ''
 p 'As you can see there are errors in this file: tests/test-bad-mdfile/bad.md'
 p ''
-pe 'bat -p tests/test-bad-mdfile/bad.md'
+pe 'cat tests/test-bad-mdfile/bad.md'
 
 p ''
 p '(There should be a new line after the header in the bad.md file)'

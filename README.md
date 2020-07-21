@@ -41,7 +41,7 @@ Variables used by `action-my-markdown-linter` GitHub Action:
 | `debug`         | (not defined)                                          | Enable debug mode for the [entrypoint.sh](entrypoint.sh) script (`set -x`)                                                                                                                      |
 | `exclude`       | (not defined)                                          | Exclude files or directories - see the [--exclude parameter](https://github.com/sharkdp/fd#excluding-specific-files-or-directories) of [fd](https://github.com/sharkdp/fd) command |
 | `fd_cmd_params` | `. -0 --extension md --type f --hidden --no-ignore`    | Set your own parameters for [fd](https://github.com/sharkdp/fd) command. `exclude` and `search_paths` parameters are ignored if this is set.                                       |
-| `search_paths`  | (not defined)                                          | By default all `*.md` are checked in whole repository, but you can specify your directories                                                                                        |
+| `search_paths`  | (not defined)                                          | By default all `*.md` are checked in whole repository, but you can specify directories                                                                                        |
 
 Non of the parameters above are "mandatory".
 
@@ -125,6 +125,10 @@ Output:
 *** Running: markdownlint  tests/test2/normal.md
 *** Checks completed...
 ```
+
+Demo:
+
+[![My Markdown Linter](https://asciinema.org/a/348706.svg)](https://asciinema.org/a/348706)
 
 ## Examples
 
