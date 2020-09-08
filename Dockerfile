@@ -9,8 +9,8 @@ LABEL "com.github.actions.description"="Lint Markdown files"
 LABEL "com.github.actions.icon"="list"
 LABEL "com.github.actions.color"="blue"
 
-# Commented - use latest version by default
-# ENV MARKDOWNLINT_CLI_VERSION="0.23.2"
+# Comment to use latest version
+ENV MARKDOWNLINT_CLI_VERSION="0.23.2"
 
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
