@@ -132,12 +132,10 @@ Demo:
 
 ## Examples
 
-The following links contains real examples of My Markdown Linter:
+Real examples of My Markdown Linter usage:
 
-* [https://github.com/ruzickap/k8s-harbor/blob/0d71cad7050758b7956ebddad48a3239ddb13037/.github/workflows/vuepress-build-check-deploy.yml#L30-L34](https://github.com/ruzickap/k8s-harbor/blob/0d71cad7050758b7956ebddad48a3239ddb13037/.github/workflows/vuepress-build-check-deploy.yml#L30-L34)
+* [markdownlint-check](https://github.com/ruzickap/k8s-harbor/runs/1009647852)
+  started by GH Action defined in [vuepress-build-check-deploy.yml](https://github.com/ruzickap/k8s-harbor/blob/f46d563919bc1494faae8b54ed9c9a6523ea7a87/.github/workflows/vuepress-build-check-deploy.yml#L25-L34)
 
-  Go to "Actions -> vuepress-build-check-deploy -> markdownlint-check" in the repository
-
-* [https://github.com/ruzickap/action-my-markdown-linter/blob/9df2003a2c445df2718e2c1212c899a35158cffa/.github/workflows/tests.yml](https://github.com/ruzickap/action-my-markdown-linter/blob/9df2003a2c445df2718e2c1212c899a35158cffa/.github/workflows/tests.yml)
-
-  Go to "Actions -> tests -> test" in the repository
+* [markdown](https://github.com/ruzickap/action-my-markdown-linter/runs/893934056)
+  started by GH Action defined in [markdown.yml](https://github.com/ruzickap/action-my-markdown-linter/blob/ff96b5751a18c9a094840e8f5c41fd96e8195c06/.github/workflows/markdown.yml#L24-L29)
