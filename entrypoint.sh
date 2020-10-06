@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -Eeuo pipefail
 
 # Config file for markdownlint-cli (it's using .markdownlint.json/.markdownlint.yaml/.markdownlint.yml by default)
 export CONFIG_FILE=${INPUT_CONFIG_FILE:-}
