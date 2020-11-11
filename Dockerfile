@@ -10,7 +10,7 @@ LABEL "com.github.actions.icon"="list"
 LABEL "com.github.actions.color"="blue"
 
 # Comment to use latest version
-ENV MARKDOWNLINT_CLI_VERSION="0.24.0"
+ENV MARKDOWNLINT_CLI_VERSION="0.25.0"
 
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
