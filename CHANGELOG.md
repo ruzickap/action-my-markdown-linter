@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.0.2](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.0.1...v1.0.2) (2021-03-02)
+
+- Upgrade markdownlint-cli [`eeb08c3`](https://github.com/ruzickap/action-my-markdown-linter/commit/eeb08c3c0b61e65bf8d5598358d22185be579bd1)
+- Upgrade markdownlint-cli [`89d39bc`](https://github.com/ruzickap/action-my-markdown-linter/commit/89d39bc5714bda852b74b0c369afbd87829c2866)
+- Increase markdownlint-cli version [`41927ca`](https://github.com/ruzickap/action-my-markdown-linter/commit/41927caf82862835ff52840e6647aad6c4bc3c05)
+
 ## [v1.0.1](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.0.0...v1.0.1) (2020-09-17)
 
 - Set version of super-linter and add GITHUB_TOKEN [`#16`](https://github.com/ruzickap/action-my-markdown-linter/pull/16)
