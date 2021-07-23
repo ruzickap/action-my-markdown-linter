@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.0.3](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.0.2...v1.0.3) (2021-07-23)
+
+- Upgrade markdownlint-cli [`b6019e4`](https://github.com/ruzickap/action-my-markdown-linter/commit/b6019e4d75796abc2fa814349a09d3989edec8f3)
+- Upgrade GH Actions versions [`f0095a5`](https://github.com/ruzickap/action-my-markdown-linter/commit/f0095a52ee45a29d2a91478ee8e4fff18165736b)
+
 ## [v1.0.2](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.0.1...v1.0.2) (2021-03-02)
 
 - Upgrade markdownlint-cli [`eeb08c3`](https://github.com/ruzickap/action-my-markdown-linter/commit/eeb08c3c0b61e65bf8d5598358d22185be579bd1)
@@ -16,7 +21,6 @@
 - Add demo script [`#11`](https://github.com/ruzickap/action-my-markdown-linter/pull/11)
 - Add fd_cmd_params test to GH Action's tests.yml [`#10`](https://github.com/ruzickap/action-my-markdown-linter/pull/10)
 - Remove jq and curl from Dockerfile [`#9`](https://github.com/ruzickap/action-my-markdown-linter/pull/9)
-- CHANGELOG file update [`#8`](https://github.com/ruzickap/action-my-markdown-linter/pull/8)
 - Fix super-linter configuration [`01daf57`](https://github.com/ruzickap/action-my-markdown-linter/commit/01daf571d0767b436cb3dcbb09b9cb6ee40a8332)
 - README updated with examples [`5bfcf44`](https://github.com/ruzickap/action-my-markdown-linter/commit/5bfcf443ca6042de51318403e38b8d34152a5445)
 - Set exact version of markdown-cli in Dockerfile [`89d2945`](https://github.com/ruzickap/action-my-markdown-linter/commit/89d2945ade7b33e24ff3dee496da988b4cb40d5f)
@@ -27,7 +31,6 @@
 - Fix FD_CMD_PARAMS changes based on INPUT_FD_CMD_PARAMS [`#6`](https://github.com/ruzickap/action-my-markdown-linter/pull/6)
 - Update README with examples [`#5`](https://github.com/ruzickap/action-my-markdown-linter/pull/5)
 - Fix exit code in entrypoint.sh [`#4`](https://github.com/ruzickap/action-my-markdown-linter/pull/4)
-- CHANGELOG file update [`#3`](https://github.com/ruzickap/action-my-markdown-linter/pull/3)
 
 ## v0.0.1 (2020-07-16)
 
