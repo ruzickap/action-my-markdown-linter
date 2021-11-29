@@ -14,8 +14,6 @@ and [fd](https://github.com/sharkdp/fd).
 See the basic GitHub Action example:
 
 ```yaml
-name: markdown_lint
-
 on:
   push:
 
