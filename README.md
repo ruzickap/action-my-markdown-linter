@@ -14,10 +14,10 @@ and [fd](https://github.com/sharkdp/fd).
 See the basic GitHub Action example:
 
 ```yaml
+name: markdown_lint
 on:
   push:
 
-name: Lint Markdown files
 jobs:
   markdown_lint:
     name: Check Markdown files
