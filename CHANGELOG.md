@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.0.5](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.0.4...v1.0.5)
+
+- Change master to main [`#32`](https://github.com/ruzickap/action-my-markdown-linter/pull/32)
+- docs: had duplicate name entry in yaml source code snippet [`#31`](https://github.com/ruzickap/action-my-markdown-linter/pull/31)
+
 ## [v1.0.4](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.0.3...v1.0.4) (2021-11-20)
 
 - Upgrade markdownlint-cli [`4e819af`](https://github.com/ruzickap/action-my-markdown-linter/commit/4e819af900d463607d08be36736a8dd020a8e598)
