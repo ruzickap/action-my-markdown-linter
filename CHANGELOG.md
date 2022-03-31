@@ -1,6 +1,11 @@
 # Changelog
 
-## [v1.0.5](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.0.4...v1.0.5)
+## [v1.0.6](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.0.5...v1.0.6)
+
+- fix: ignoring .git path for fd command [`4dc4ea0`](https://github.com/ruzickap/action-my-markdown-linter/commit/4dc4ea05a35a98f5c882ab7ab1238c44b3d5607b)
+- Upgrade markdownlint-cli [`a48c4a4`](https://github.com/ruzickap/action-my-markdown-linter/commit/a48c4a41be674e6b7cd5f92d484176ee45ff06b1)
+
+## [v1.0.5](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.0.4...v1.0.5) (2022-02-05)
 
 - Change master to main [`#32`](https://github.com/ruzickap/action-my-markdown-linter/pull/32)
 - docs: had duplicate name entry in yaml source code snippet [`#31`](https://github.com/ruzickap/action-my-markdown-linter/pull/31)
