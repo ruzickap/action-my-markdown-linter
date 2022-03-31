@@ -12,7 +12,7 @@ export DEBUG=${INPUT_DEBUG:-}
 export EXCLUDE=${INPUT_EXCLUDE:-}
 
 # Command line parameters for fd ("exclude" and "search_paths" parameters are ignored if this is set)
-export FD_CMD_PARAMS="${INPUT_FD_CMD_PARAMS:- . -0 --extension md --type f --hidden --no-ignore}"
+export FD_CMD_PARAMS="${INPUT_FD_CMD_PARAMS:- . -0 --extension md --type f --hidden --no-ignore --exclude .git/}"
 
 # Files or paths which will be linted
 export SEARCH_PATHS=${INPUT_SEARCH_PATHS:-}
