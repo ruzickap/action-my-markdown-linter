@@ -1,7 +1,14 @@
 # Changelog
 
-## [v1.0.9](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.0.8...v1.0.9)
+## [v1.0.10](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.0.9...v1.0.10)
 
+- chore(deps): update dependency markdownlint-cli to v0.37.0 [`88f437a`](https://github.com/ruzickap/action-my-markdown-linter/commit/88f437a100bda11172532dc81fee68ba2f15dbdf)
+- chore(deps): update tibdex/github-app-token action to v2 [`ee03e3d`](https://github.com/ruzickap/action-my-markdown-linter/commit/ee03e3d587dcd0bc00b62ab8232c657986ebaff0)
+- chore(deps): update actions/checkout action to v4 [`dcc0b33`](https://github.com/ruzickap/action-my-markdown-linter/commit/dcc0b33e21f1aead914b8fb29e7f0d13462a48fb)
+
+## [v1.0.9](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.0.8...v1.0.9) (2023-09-03)
+
+- docs(changelog): CHANGELOG file update [skip ci] [`26087a7`](https://github.com/ruzickap/action-my-markdown-linter/commit/26087a713151a5e10f24ca10579d4261cffbe604)
 - feat(gha): add debug to renovate github action [`2f50958`](https://github.com/ruzickap/action-my-markdown-linter/commit/2f50958fe7394a9375a6a870866934fac87a8fa2)
 - chore(deps): update dependency markdownlint-cli to v0.36.0 [`b474665`](https://github.com/ruzickap/action-my-markdown-linter/commit/b474665efd3ee5f51824231e035563578730e980)
 - chore(deps): update renovatebot/github-action action to v39 [`2bae622`](https://github.com/ruzickap/action-my-markdown-linter/commit/2bae622fd088af91bf7b2b249ffdc2f40d520a1c)
