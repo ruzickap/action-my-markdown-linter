@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.0.10...v1.1.0) (2023-12-02)
+
+
+### Features
+
+* **gha:** add release-please, format renovate.json5, del update-semver ([aea73de](https://github.com/ruzickap/action-my-markdown-linter/commit/aea73dec581c2884a78102b73622e88f3481fc3e))
+
 ## [v1.0.10](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.0.9...v1.0.10)
 
 - chore(deps): update dependency markdownlint-cli to v0.37.0 [`88f437a`](https://github.com/ruzickap/action-my-markdown-linter/commit/88f437a100bda11172532dc81fee68ba2f15dbdf)
