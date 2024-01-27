@@ -6,7 +6,6 @@ on:
     paths:
       - Dockerfile
       - .dockerignore
-      - .hadolint.yaml
       - entrypoint.sh
       - .github/workflows/docker-image.yml
   push:
@@ -15,26 +14,16 @@ on:
     paths:
       - Dockerfile
       - .dockerignore
-      - .hadolint.yaml
       - entrypoint.sh
       - .github/workflows/docker-image.yml
+
+permissions: read-all
 
 jobs:
   docker-build-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
       - name: Build test
         run: docker build . --file Dockerfile
-
-  hadolint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: hadolint
-        uses: burdzwastaken/hadolint-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          HADOLINT_ACTION_DOCKERFILE_FOLDER: .

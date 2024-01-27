@@ -1,19 +1,19 @@
-name: 'My Markdown Linter'
-description: 'Lint Markdown files'
-author: 'ruzickap'
+name: "My Markdown Linter"
+description: "Lint Markdown files"
+author: "ruzickap"
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "docker"
+  image: "Dockerfile"
 branding:
-  icon: 'list'
-  color: 'blue'
+  icon: "list"
+  color: "blue"
 inputs:
   config_file:
-    description: 'markdownlint-cli config file'
+    description: "markdownlint-cli config file"
   debug:
-    description: 'Debug mode'
+    description: "Debug mode"
   exclude:
-    description: 'Exclude files or directories'
+    description: "Exclude files or directories"
   fd_cmd_params:
     description: 'Command line parameters for fd command. "exclude" and "search_paths" parameters are ignored if this is set'
   search_paths:
