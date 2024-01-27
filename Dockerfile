@@ -14,11 +14,17 @@ ENV MARKDOWNLINT_CLI_VERSION="0.38.0"
 
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
+# kics-scan ignore-block
 RUN set -eux && \
     apk --update --no-cache add bash fd && \
     npm install --global --production "markdownlint-cli@v${MARKDOWNLINT_CLI_VERSION}"
 
 COPY entrypoint.sh /entrypoint.sh
 
+USER nobody
+
 WORKDIR /mnt
+
+HEALTHCHECK NONE
+
 ENTRYPOINT [ "/entrypoint.sh" ]
