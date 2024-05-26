@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.1.0...v1.2.0) (2024-05-26)
+
+
+### Features
+
+* **gha:** Add GitHub repo files ([#71](https://github.com/ruzickap/action-my-markdown-linter/issues/71)) ([9988e92](https://github.com/ruzickap/action-my-markdown-linter/commit/9988e92ffca37fcb62e2cd4240f220b4a239c2a0))
+* **gh:** add default GitHub repo files ([#72](https://github.com/ruzickap/action-my-markdown-linter/issues/72)) ([7d6415e](https://github.com/ruzickap/action-my-markdown-linter/commit/7d6415e036ad25346b75b82731a79fd92e644fca))
+* **gh:** add default GitHub repo files ([#73](https://github.com/ruzickap/action-my-markdown-linter/issues/73)) ([f8974c0](https://github.com/ruzickap/action-my-markdown-linter/commit/f8974c087ff07fc07c28bff701cc8bf0c9c3ebd6))
+* **gh:** add default GitHub repo files ([#74](https://github.com/ruzickap/action-my-markdown-linter/issues/74)) ([d29c8b4](https://github.com/ruzickap/action-my-markdown-linter/commit/d29c8b453cb29f59c98f8ac348949d8a7d1c4a9c))
+* **gha:** make checkov config part of megalinter ([d1a0ea2](https://github.com/ruzickap/action-my-markdown-linter/commit/d1a0ea2f511463cd3569ff5b6aa1f987a5d20418))
+* **gha:** unify GHA - renovate, megalinter, markdown, and others ([3a4e211](https://github.com/ruzickap/action-my-markdown-linter/commit/3a4e2110b23a17b261a01a81dd6a5bb72bd7b91a))
+
 ## [1.1.0](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.0.10...v1.1.0) (2023-12-02)
 
 
