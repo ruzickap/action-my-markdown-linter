@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.2.0...v1.3.0) (2024-10-06)
+
+
+### Features
+
+* add GitHub default templates ([#75](https://github.com/ruzickap/action-my-markdown-linter/issues/75)) ([43c03d0](https://github.com/ruzickap/action-my-markdown-linter/commit/43c03d04becefcc73fe6492a85ba869686f52080))
+
 ## [1.2.0](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.1.0...v1.2.0) (2024-05-26)
 
 
