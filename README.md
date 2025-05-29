@@ -39,9 +39,9 @@ Variables used by `action-my-markdown-linter` GitHub Action:
 | `debug`         | (not defined)                                          | Enable debug mode for the [entrypoint.sh](entrypoint.sh) script (`set -x`)                                                                                                         |
 | `exclude`       | (not defined)                                          | Exclude files or directories - see the [--exclude parameter](https://github.com/sharkdp/fd#excluding-specific-files-or-directories) of [fd](https://github.com/sharkdp/fd) command |
 | `fd_cmd_params` | `. -0 --extension md --type f --hidden --no-ignore`    | Set your own parameters for [fd](https://github.com/sharkdp/fd) command. `exclude` and `search_paths` parameters are ignored if this is set.                                       |
-| `search_paths`  | (not defined)                                          | By default all `*.md` are checked in whole repository, but you can specify directories                                                                                             |
+| `search_paths`  | (not defined)                                          | By default, all `*.md` files are checked in the whole repository, but you can specify directories                                                                                  |
 
-Non of the parameters above are "mandatory".
+None of the parameters above are mandatory.
 
 ## Full example
 
@@ -57,7 +57,7 @@ on:
 
 jobs:
   markdown_lint:
-  name: Check Markdown files
+    name: Check Markdown files
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -92,7 +92,7 @@ jobs:
 
 ## Running locally
 
-It's possible to use the Markdown linter task locally using docker:
+It's possible to use the Markdown linter task locally using Docker:
 
 ```bash
 docker run --rm -t -v "${PWD}/tests/test2:/mnt" peru/my-markdown-linter
