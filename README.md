@@ -90,44 +90,6 @@ jobs:
         uses: docker://peru/my-markdown-linter@v1
 ```
 
-## Running locally
-
-It's possible to use the Markdown linter task locally using Docker:
-
-```bash
-docker run --rm -t -v "${PWD}/tests/test2:/mnt" peru/my-markdown-linter
-```
-
-Output:
-
-```text
-*** Start checking...
-*** Running: fd . -0 --extension md --type f --hidden --no-ignore
-*** Running: markdownlint  normal.md
-*** Checks completed...
-```
-
-Or you can also use parameters:
-
-```bash
-export INPUT_EXCLUDE="CHANGELOG.md test1/excluded_file.md bad.md excluded_dir/"
-export INPUT_SEARCH_PATHS="tests/"
-docker run --rm -t -e INPUT_EXCLUDE -e INPUT_SEARCH_PATHS -v "${PWD}:/mnt" peru/my-markdown-linter
-```
-
-Output:
-
-```text
-*** Start checking...
-*** Running: fd . -0 --extension md --type f --hidden --no-ignore --exclude CHANGELOG.md --exclude test1/excluded_file.md --exclude bad.md --exclude excluded_dir/ tests/
-*** Running: markdownlint  tests/test2/normal.md
-*** Checks completed...
-```
-
-Demo:
-
-[![My Markdown Linter](https://asciinema.org/a/348715.svg)](https://asciinema.org/a/348715)
-
 ## Examples
 
 Real examples of My Markdown Linter usage:
