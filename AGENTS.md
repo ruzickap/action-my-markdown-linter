@@ -79,7 +79,7 @@ Format with: `shfmt --case-indent --indent 2 --space-redirects`
 
 ## Markdown Style
 
-- Wrap lines at **72 characters** (configured in `.rumdl.toml`)
+- Wrap lines at **80 characters** for readability
 - Use proper heading hierarchy (no skipped levels)
 - Always include language identifiers in code fences
 - Prefer code fences over inline code for multi-line examples
