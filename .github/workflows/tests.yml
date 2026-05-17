@@ -26,17 +26,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
       - name: Test 1 - Check done in tests/test2 - tests/test2/normal.md
-        # Unpinned Actions Full Length Commit SHA
-        # kics-scan ignore-line
         uses: ./
         with:
           debug: true
           search_paths: tests/test2
 
       - name: Test 2 - Check with "exclude" and "search_paths" - tests/test2/normal.md
-        # kics-scan ignore-line
         uses: ./
         with:
           debug: true
@@ -48,7 +47,6 @@ jobs:
           search_paths: tests/
 
       - name: Test 3 - Check with "fd_cmd_params" - tests/test2/normal.md
-        # kics-scan ignore-line
         uses: ./
         with:
           fd_cmd_params: ". -0 --extension md --type f --hidden --no-ignore --exclude CHANGELOG.md --exclude test1/excluded_file.md --exclude bad.md --exclude excluded_dir/ tests/"

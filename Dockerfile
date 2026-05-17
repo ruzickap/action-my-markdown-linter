@@ -14,7 +14,6 @@ ENV MARKDOWNLINT_CLI_VERSION="0.48.0"
 
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
-# kics-scan ignore-block
 RUN set -eux && \
     apk --update --no-cache add bash fd && \
     npm install --global --production "markdownlint-cli@v${MARKDOWNLINT_CLI_VERSION}"

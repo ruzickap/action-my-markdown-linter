@@ -110,8 +110,6 @@ CI runs multiple scanners. Be aware when modifying files:
 
 - **Checkov**: Skips `CKV_GHA_7` (workflow_dispatch inputs)
 - **DevSkim**: Ignores DS162092 (debug code), DS137138
-- **KICS**: Fails only on HIGH severity; use
-  `# kics-scan ignore-line` to suppress known issues
 - **Trivy**: HIGH/CRITICAL only, ignores unfixed vulnerabilities
 - **CodeQL**: Targets GitHub Actions language
 
