@@ -1,148 +1,76 @@
-# AI Agent Guidelines
+# AGENTS.md
 
-## Project Overview
+Repo-specific notes for agents. General linting/commit/branch conventions live
+in the global `~/.config/opencode/AGENTS.md`; this file only covers what is
+specific to this repo or easy to get wrong here.
 
-Docker-based GitHub Action (`action-my-markdown-linter`) that lints
-Markdown files using `markdownlint-cli` and `fd`. The core logic is a
-single Bash script (`entrypoint.sh`) packaged in an Alpine Docker image.
+## What this repo is
 
-## Build and Test Commands
+A **Docker-based GitHub Action** that lints Markdown files. Not a library/app.
+Execution chain: `action.yml` (`using: docker`) -> `Dockerfile` ->
+`entrypoint.sh`. The action runs `markdownlint-cli` over files discovered by
+[`fd`](https://github.com/sharkdp/fd). Published to Docker Hub as
+`peru/my-markdown-linter` and to the GitHub Marketplace.
 
-### Build
+Core files:
 
-```bash
-docker build . --file Dockerfile
-```
+- `entrypoint.sh` - all action logic. Reads `INPUT_*` env vars (set by Action
+  inputs), builds an `fd` command, pipes each result to `markdownlint`.
+- `action.yml` - input definitions (`config_file`, `debug`, `exclude`,
+  `fd_cmd_params`, `search_paths`). Keep in sync with `entrypoint.sh` + README.
+- `Dockerfile` - `node:current-alpine`; installs `bash`, `fd`, and
+  `markdownlint-cli`.
+- `tests/` - fixture `*.md` files exercised by `.github/workflows/tests.yml`.
 
-No compilation step; the Dockerfile installs `markdownlint-cli`
-via npm and copies `entrypoint.sh` into the image.
+## Two linting layers (do not confuse them)
 
-### Test
+1. **The action's linter** (shipped to users): `markdownlint-cli`, version
+   pinned in `Dockerfile` (`MARKDOWNLINT_CLI_VERSION`).
+2. **This repo's own CI linting**: **MegaLinter**, which uses **`rumdl`** for
+   Markdown. `MARKDOWN_MARKDOWNLINT` is disabled in `.mega-linter.yml`.
+   So repo Markdown is checked by rumdl (`.rumdl.toml`), not markdownlint.
 
-Tests are integration tests in `.github/workflows/tests.yml`
-exercising the Docker action end-to-end. To run locally:
+The README documents `.markdownlint.yaml` as the action's default config; there
+is no such file in this repo (users supply their own).
 
-```bash
-docker build -t action-my-markdown-linter .
+## CI gotchas
 
-# Single test: lint tests/test2 only
-docker run --rm -t \
-  -e INPUT_SEARCH_PATHS="tests/test2" \
-  -e INPUT_DEBUG="true" \
-  -v "${PWD}:/mnt" action-my-markdown-linter
+- **README bash blocks are executed.**
+  `.github/workflows/readme-commands-check.yml`
+  extracts every ```` ```bash ```` block from `README.md` and runs it with
+  `bash -euxo pipefail`. Any bash fence in the README must actually run clean.
+- **MegaLinter runs only on non-`main` branches** and is skipped for
+  `chore/renovate/*` and `release-please--*` branches (see `mega-linter.yml`).
+  To get a full lint pass, push to a feature branch and open a PR.
+- **`tests.yml` / `docker-image.yml` are path-filtered**: they trigger only when
+  `Dockerfile`, `entrypoint.sh`, `.dockerignore`, `tests/**`, or the workflow
+  itself changes.
+- **`docker-image` and `readme-commands-check` run on both `ubuntu-latest` and
+  `ubuntu-24.04-arm`** - keep commands/image arch-agnostic.
+- `MARKDOWNLINT_CLI_VERSION` in `Dockerfile` is **Renovate-managed** (has a
+  `# renovate:` comment). Do not bump it manually.
 
-# With exclude patterns
-docker run --rm -t \
-  -e INPUT_EXCLUDE="CHANGELOG.md test1/excluded_file.md bad.md excluded_dir/" \
-  -e INPUT_SEARCH_PATHS="tests/" \
-  -v "${PWD}:/mnt" action-my-markdown-linter
+## Test fixtures
 
-# With custom fd parameters
-docker run --rm -t \
-  -e INPUT_FD_CMD_PARAMS=". -0 --extension md --type f --hidden --no-ignore --exclude CHANGELOG.md tests/" \
-  -v "${PWD}:/mnt" action-my-markdown-linter
-```
+`tests/test-bad-mdfile/bad.md` is intentionally broken and **must stay failing**
+for markdownlint - it proves the action detects errors. CI never runs the action
+over it directly (it is always excluded); the demo and tests show it being
+excluded. Its `<!-- markdownlint-disable -->` only neutralizes rumdl so it does
+not break this repo's own MegaLinter run. Do not "fix" this file.
 
-No unit test framework. Each test maps to a CI workflow step.
+## Releases
 
-### Lint
+Automated via **release-please** (`release-type: simple`, driven by Conventional
+Commits on `main`). On release it force-pushes/moves the `v<major>` and
+`v<major>.<minor>` tags. Do not hand-edit `CHANGELOG.md` or create version tags
+manually. `CHANGELOG.md` is generated and is excluded from nearly every linter.
 
-Linting runs via MegaLinter (`.mega-linter.yml`). Key checks:
+## Conventions easy to miss
 
-```bash
-shellcheck --exclude=SC2317 entrypoint.sh
-shfmt --case-indent --indent 2 --space-redirects -d entrypoint.sh
-rumdl README.md
-lychee --config lychee.toml .
-jsonlint --comments .github/renovate.json5
-actionlint
-checkov --quiet --skip-check CKV_GHA_7 -d .
-trivy fs --severity HIGH,CRITICAL --ignore-unfixed .
-```
-
-## Shell Script Style (`entrypoint.sh`)
-
-- **Shebang**: `#!/usr/bin/env bash`
-- **Strict mode**: `set -Eeuo pipefail` (always)
-- **Indentation**: 2 spaces, no tabs
-- **Variables**: UPPERCASE with braces: `${MY_VARIABLE}`
-- **Defaults**: `${INPUT_VAR:-}` for empty, `${INPUT_VAR:-default}`
-- **Functions**: `name() { ... }` syntax
-- **Error handling**: `trap error_trap ERR` for centralized handling
-- **Arrays**: `declare -a` with `+=` for appending
-- **Null-delimited I/O**: `fd -0` piped to `read -r -d ''`
-- **Section headers**: `####` comment blocks
-- **shellcheck directives**: Inline `# shellcheck disable=SCXXXX`
-  with justification; SC2317 globally excluded
-
-Format with: `shfmt --case-indent --indent 2 --space-redirects`
-
-## Markdown Style
-
-- Wrap lines at **80 characters** for readability
-- Use proper heading hierarchy (no skipped levels)
-- Always include language identifiers in code fences
-- Prefer code fences over inline code for multi-line examples
-- Validate with `rumdl` (not `markdownlint` in CI for this repo)
-- Bash code blocks are extracted and validated with `shellcheck`
-  and `shfmt` during CI
-
-## YAML Style (GitHub Actions Workflows)
-
-- Start with `---` document marker (recommended)
-- Include header comment describing the workflow purpose
-- Set `permissions: read-all` at workflow level; scope per-job
-- Pin all actions to **full SHA** with version comment:
-  `uses: actions/checkout@<sha> # v6.0.2`
-- Set `timeout-minutes` on every job (typically 5-10)
-- Use `# keep-sorted start` / `# keep-sorted end` for sorted
-  blocks
-- Validate changes with `actionlint`
-
-## JSON Files
-
-- Must pass `jsonlint --comments` validation
-- JSON5 (`.json5`) used for Renovate config with `//` comments
-
-## Security Scanning
-
-CI runs multiple scanners. Be aware when modifying files:
-
-- **Checkov**: Skips `CKV_GHA_7` (workflow_dispatch inputs)
-- **DevSkim**: Ignores DS162092 (debug code), DS137138
-- **Trivy**: HIGH/CRITICAL only, ignores unfixed vulnerabilities
-- **CodeQL**: Targets GitHub Actions language
-
-## Version Control
-
-### Commit Messages
-
-Conventional commit format: `<type>: <description>`
-
-Types: `feat`, `fix`, `docs`, `chore`, `refactor`, `test`,
-`style`, `perf`, `ci`, `build`, `revert`
-
-Subject: imperative mood, lowercase, no trailing period,
-max 72 characters. Body: optional; wrap at 72 chars; explain
-what and why. Reference issues with `Fixes`/`Closes`/`Resolves`.
-
-### Branching
-
-Conventional Branch format: `<type>/<description>`
-(`feature/`, `bugfix/`, `hotfix/`, `release/`, `chore/`).
-Use lowercase and hyphens. Include issue numbers when
-applicable: `feature/issue-42-add-export`.
-
-### Pull Requests
-
-- Always create as **draft** initially
-- Title must follow conventional commit format
-- Link related issues with `Fixes`, `Closes`, `Resolves`
-
-## General Quality Rules
-
-- Two spaces for indentation everywhere (shell, YAML, Markdown)
-- No tabs; pass all pre-commit hooks before committing
-- Make atomic, focused commits
-- Update documentation for user-facing changes
-- Keep `CHANGELOG.md` untouched (managed by release-please)
+- `keep-sorted` blocks (`.mega-linter.yml`, `.github/workflows/stale.yml`) must
+  stay alphabetically sorted between the `keep-sorted start/end` markers.
+- Commit subjects here allow lowercase (`CCHK_SUBJECT_CAPITALIZED: false`) and
+  must be <= 72 chars; branch names must follow Conventional Branch
+  (`feature/`, `bugfix/`, ...).
+- Shell scripts use `set -Eeuo pipefail` and the `print_info`/`print_error`/
+  `error_trap` helpers in `entrypoint.sh`; match that style.
