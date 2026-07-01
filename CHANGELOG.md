@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.3.0...v1.3.1) (2026-07-01)
+
+
+### Miscellaneous Chores
+
+* release 1.3.1 ([#120](https://github.com/ruzickap/action-my-markdown-linter/issues/120)) ([6178f80](https://github.com/ruzickap/action-my-markdown-linter/commit/6178f80fb136933c71f524cea4eab476cb1a1633))
+
 ## [1.3.0](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.2.0...v1.3.0) (2025-10-20)
 
 
