@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.2](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.3.1...v1.3.2) (2026-07-01)
+
+
+### Bug Fixes
+
+* authenticate rolling version tag push in release-please ([#122](https://github.com/ruzickap/action-my-markdown-linter/issues/122)) ([ae6965c](https://github.com/ruzickap/action-my-markdown-linter/commit/ae6965c689b581103bc484eba01e8cafc4c218d0))
+* use auth header instead of token in URL for tag push ([#124](https://github.com/ruzickap/action-my-markdown-linter/issues/124)) ([a5ea6c1](https://github.com/ruzickap/action-my-markdown-linter/commit/a5ea6c10dd85d7fb7c39d3f6c8362b2f3517bc62))
+
 ## [1.3.1](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.3.0...v1.3.1) (2026-07-01)
 
 
