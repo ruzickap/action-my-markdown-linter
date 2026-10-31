@@ -25,7 +25,7 @@ Core files:
 ## Two linting layers (do not confuse them)
 
 1. **The action's linter** (shipped to users): `markdownlint-cli`, version
-   pinned in `Dockerfile` (`MARKDOWNLINT_CLI_VERSION`).
+   pinned in `package.json` / `package-lock.json` (installed via `npm ci`).
 2. **This repo's own CI linting**: **MegaLinter**, which uses **`rumdl`** for
    Markdown. `MARKDOWN_MARKDOWNLINT` is disabled in `.mega-linter.yml`.
    So repo Markdown is checked by rumdl (`.rumdl.toml`), not markdownlint.
@@ -47,8 +47,8 @@ is no such file in this repo (users supply their own).
   itself changes.
 - **`docker-image` and `readme-commands-check` run on both `ubuntu-latest` and
   `ubuntu-24.04-arm`** - keep commands/image arch-agnostic.
-- `MARKDOWNLINT_CLI_VERSION` in `Dockerfile` is **Renovate-managed** (has a
-  `# renovate:` comment). Do not bump it manually.
+- `markdownlint-cli` in `package.json` / `package-lock.json` is
+  **Renovate-managed**. Do not bump it manually.
 
 ## Test fixtures
 

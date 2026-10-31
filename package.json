@@ -1,0 +1,7 @@
+{
+  "name": "action-my-markdown-linter",
+  "private": true,
+  "dependencies": {
+    "markdownlint-cli": "0.50.0"
+  }
+}
