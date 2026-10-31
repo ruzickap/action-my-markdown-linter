@@ -9,14 +9,15 @@ LABEL "com.github.actions.description"="Lint Markdown files"
 LABEL "com.github.actions.icon"="list"
 LABEL "com.github.actions.color"="blue"
 
-# renovate: datasource=npm depName=markdownlint-cli versioning=npm
-ENV MARKDOWNLINT_CLI_VERSION="0.50.0"
-
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
+
+COPY package.json package-lock.json /opt/app/
+
+ENV PATH="/opt/app/node_modules/.bin:${PATH}"
 
 RUN set -eux && \
     apk --update --no-cache add bash fd && \
-    npm install --global --production "markdownlint-cli@v${MARKDOWNLINT_CLI_VERSION}"
+    npm ci --omit=dev --prefix /opt/app
 
 COPY entrypoint.sh /entrypoint.sh
 
