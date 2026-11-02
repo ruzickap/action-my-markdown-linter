@@ -8,6 +8,6 @@
   "overrides": {
     "katex": "0.18.10",
     "minimatch": "11.0.3",
-    "re2js": "2.8.7"
+    "re2js": "2.8.8"
   }
 }
