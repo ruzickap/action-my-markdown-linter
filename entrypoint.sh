@@ -5,7 +5,7 @@ set -Eeuo pipefail
 # Config file for markdownlint-cli (it's using .markdownlint.json/.markdownlint.yaml/.markdownlint.yml by default)
 export CONFIG_FILE=${INPUT_CONFIG_FILE:-}
 
-# Debug variable - enable by setting non-empty value
+# Debug variable - enable by setting any value except "false"
 export DEBUG=${INPUT_DEBUG:-}
 
 # Exclude files or directories which should not be linted
@@ -36,7 +36,7 @@ error_trap() {
 
 trap error_trap ERR
 
-[ -n "${DEBUG}" ] && set -x
+[ "${DEBUG:-false}" != "false" ] && set -x
 
 # Read all lines, not just the first ("read -d ''" returns 1 at the end of input)
 read -r -d '' -a FD_CMD_PARAMS <<< "${FD_CMD_PARAMS}" || true
