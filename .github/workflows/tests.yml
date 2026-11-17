@@ -33,14 +33,16 @@ jobs:
         with:
           persist-credentials: false
 
+      # zizmor wants "uses: $/" (self-repository), but actionlint 1.7.12 rejects it:
+      # https://github.com/rhysd/actionlint/issues/711 - switch once it is supported
       - name: Test 1 - Check done in tests/test2 - tests/test2/normal.md
-        uses: ./
+        uses: ./ # zizmor: ignore[self-repository]
         with:
           debug: true
           search_paths: tests/test2
 
       - name: Test 2 - Check with "exclude" and "search_paths" - tests/test2/normal.md
-        uses: ./
+        uses: ./ # zizmor: ignore[self-repository]
         with:
           debug: true
           exclude: |
@@ -51,6 +53,6 @@ jobs:
           search_paths: tests/
 
       - name: Test 3 - Check with "fd_cmd_params" - tests/test2/normal.md
-        uses: ./
+        uses: ./ # zizmor: ignore[self-repository]
         with:
           fd_cmd_params: ". -0 --extension md --type f --hidden --no-ignore --exclude CHANGELOG.md --exclude test1/excluded_file.md --exclude bad.md --exclude excluded_dir/ tests/"
