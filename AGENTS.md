@@ -68,7 +68,7 @@ manually. `CHANGELOG.md` is generated and is excluded from nearly every linter.
 ## Conventions easy to miss
 
 - `keep-sorted` blocks (`.mega-linter.yml`, `.github/workflows/stale.yml`) must
-  stay alphabetically sorted between the `keep-sorted start/end` markers.
+  stay alphabetically sorted between their `keep-sorted` start and end markers.
 - Commit subjects here allow lowercase (`CCHK_SUBJECT_CAPITALIZED: false`) and
   must be <= 72 chars; branch names must follow Conventional Branch
   (`feature/`, `bugfix/`, ...).
