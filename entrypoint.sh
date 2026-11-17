@@ -38,14 +38,18 @@ trap error_trap ERR
 
 [ -n "${DEBUG}" ] && set -x
 
-IFS=' ' read -r -a FD_CMD_PARAMS <<< "$FD_CMD_PARAMS"
+# Read all lines, not just the first ("read -d ''" returns 1 at the end of input)
+read -r -d '' -a FD_CMD_PARAMS <<< "${FD_CMD_PARAMS}" || true
 
 # Change FD_CMD_PARAMS variable only if INPUT_FD_CMD_PARAMS was not defined or is empty
 if [ -z "${INPUT_FD_CMD_PARAMS+x}" ] || [ -z "${INPUT_FD_CMD_PARAMS}" ]; then
   if [ -n "${EXCLUDE}" ]; then
+    # No glob expansion: fd must get patterns like "*.md" unchanged
+    set -f
     for EXCLUDED in ${EXCLUDE}; do
       FD_CMD_PARAMS+=("--exclude" "${EXCLUDED}")
     done
+    set +f
   fi
 
   if [ -n "${SEARCH_PATHS}" ]; then

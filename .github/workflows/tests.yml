@@ -52,10 +52,13 @@ jobs:
             excluded_dir/
           search_paths: tests/
 
-      - name: Test 3 - Check with "fd_cmd_params" - tests/test2/normal.md
+      - name: Test 3 - Check with multi-line "fd_cmd_params" - tests/test2/normal.md
         uses: ./ # zizmor: ignore[self-repository]
         with:
-          fd_cmd_params: ". -0 --extension md --type f --hidden --no-ignore --exclude CHANGELOG.md --exclude test1/excluded_file.md --exclude bad.md --exclude excluded_dir/ tests/"
+          fd_cmd_params: |
+            . -0 --extension md --type f --hidden --no-ignore
+            --exclude CHANGELOG.md --exclude test1/excluded_file.md
+            --exclude bad.md --exclude excluded_dir/ tests/
 
       - name: Test 4 - Bad file must fail - tests/test-bad-mdfile/bad.md
         id: test4
