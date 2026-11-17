@@ -56,3 +56,23 @@ jobs:
         uses: ./ # zizmor: ignore[self-repository]
         with:
           fd_cmd_params: ". -0 --extension md --type f --hidden --no-ignore --exclude CHANGELOG.md --exclude test1/excluded_file.md --exclude bad.md --exclude excluded_dir/ tests/"
+
+      - name: Test 4 - Bad file must fail - tests/test-bad-mdfile/bad.md
+        id: test4
+        continue-on-error: true
+        uses: ./ # zizmor: ignore[self-repository]
+        with:
+          search_paths: tests/test-bad-mdfile
+
+      - name: Test 5 - File in "search_paths" must fail - tests/test2/normal.md
+        id: test5
+        continue-on-error: true
+        uses: ./ # zizmor: ignore[self-repository]
+        with:
+          search_paths: |
+            tests/test2
+            tests/test2/normal.md
+
+      - name: Check that Test 4 and Test 5 failed
+        if: steps.test4.outcome != 'failure' || steps.test5.outcome != 'failure'
+        run: exit 1

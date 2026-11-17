@@ -12,9 +12,9 @@ export DEBUG=${INPUT_DEBUG:-}
 export EXCLUDE=${INPUT_EXCLUDE:-}
 
 # Command line parameters for fd ("exclude" and "search_paths" parameters are ignored if this is set)
-export FD_CMD_PARAMS="${INPUT_FD_CMD_PARAMS:- . -0 --extension md --type f --hidden --no-ignore --exclude .git/}"
+export FD_CMD_PARAMS="${INPUT_FD_CMD_PARAMS:- . --extension md --type f --hidden --no-ignore --exclude .git/}"
 
-# Files or paths which will be linted
+# Directories which will be searched for Markdown files
 export SEARCH_PATHS=${INPUT_SEARCH_PATHS:-}
 
 print_error() {
@@ -50,6 +50,11 @@ if [ -z "${INPUT_FD_CMD_PARAMS+x}" ] || [ -z "${INPUT_FD_CMD_PARAMS}" ]; then
 
   if [ -n "${SEARCH_PATHS}" ]; then
     for SEARCH_PATH in ${SEARCH_PATHS}; do
+      # fd only warns about a search path which is not a directory and skips it
+      [ -d "${SEARCH_PATH}" ] || {
+        print_error "Search path is not a directory: ${SEARCH_PATH}"
+        exit 1
+      }
       FD_CMD_PARAMS+=("${SEARCH_PATH}")
     done
   fi
@@ -61,11 +66,9 @@ if [ -n "${CONFIG_FILE}" ]; then
 fi
 
 print_info "Start checking..."
-print_info "Running: fd ${FD_CMD_PARAMS[*]}"
+print_info "Running: fd ${FD_CMD_PARAMS[*]} --exec-batch markdownlint ${MARKDOWNLINT_CMD_PARAMS[*]}"
 
-while IFS= read -r -d '' FILE; do
-  print_info "Running: markdownlint ${MARKDOWNLINT_CMD_PARAMS[*]} ${FILE}"
-  markdownlint "${MARKDOWNLINT_CMD_PARAMS[@]}" "${FILE}"
-done < <(fd "${FD_CMD_PARAMS[@]}")
+# One markdownlint run for all files; fails when fd or markdownlint fails
+fd "${FD_CMD_PARAMS[@]}" --exec-batch markdownlint "${MARKDOWNLINT_CMD_PARAMS[@]}"
 
 print_info "Checks completed..."

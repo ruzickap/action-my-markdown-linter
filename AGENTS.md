@@ -15,7 +15,8 @@ Execution chain: `action.yml` (`using: docker`) -> `Dockerfile` ->
 Core files:
 
 - `entrypoint.sh` - all action logic. Reads `INPUT_*` env vars (set by Action
-  inputs), builds an `fd` command, pipes each result to `markdownlint`.
+  inputs), builds an `fd` command that runs `markdownlint` once on all found
+  files (`fd --exec-batch`), so fd and markdownlint errors fail the action.
 - `action.yml` - input definitions (`config_file`, `debug`, `exclude`,
   `fd_cmd_params`, `search_paths`). Keep in sync with `entrypoint.sh` + README.
 - `Dockerfile` - `node:current-alpine`; installs `bash`, `fd`, and
@@ -53,10 +54,11 @@ is no such file in this repo (users supply their own).
 ## Test fixtures
 
 `tests/test-bad-mdfile/bad.md` is intentionally broken and **must stay failing**
-for markdownlint - it proves the action detects errors. CI never runs the action
-over it directly (it is always excluded); the demo and tests show it being
-excluded. Its `<!-- markdownlint-disable -->` only neutralizes rumdl so it does
-not break this repo's own MegaLinter run. Do not "fix" this file.
+for markdownlint - Test 4 in `tests.yml` expects the action to fail on it.
+Its `<!-- rumdl-disable -->` only hides it from rumdl (this repo's MegaLinter);
+markdownlint ignores that comment. Never switch it to
+`<!-- markdownlint-disable -->`: markdownlint obeys that too, so the file would
+pass. Do not "fix" this file.
 
 ## Releases
 
