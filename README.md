@@ -5,7 +5,6 @@
 [![release](https://img.shields.io/github/release/ruzickap/action-my-markdown-linter.svg)](https://github.com/ruzickap/action-my-markdown-linter/releases/latest)
 [![GitHub release date](https://img.shields.io/github/release-date/ruzickap/action-my-markdown-linter.svg)](https://github.com/ruzickap/action-my-markdown-linter/releases)
 ![GitHub Actions status](https://github.com/ruzickap/action-my-markdown-linter/workflows/docker-image/badge.svg)
-[![Docker Hub Build Status](https://img.shields.io/docker/cloud/build/peru/my-markdown-linter.svg)](https://hub.docker.com/r/peru/my-markdown-linter)
 
 This is a GitHub Action to lint Markdown files.
 It's using the [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli)
@@ -23,7 +22,7 @@ jobs:
     name: Check Markdown files
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
 
       - name: Markdown Lint
         uses: ruzickap/action-my-markdown-linter@v1
@@ -60,7 +59,7 @@ jobs:
     name: Check Markdown files
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
 
       - name: Markdown Lint
         uses: ruzickap/action-my-markdown-linter@v1
@@ -85,9 +84,6 @@ jobs:
 
       - name: Markdown Lint - simple example
         uses: ruzickap/action-my-markdown-linter@v1
-
-      - name: Markdown Lint using pre-built container
-        uses: docker://peru/my-markdown-linter@v1
 ```
 
 ## Examples

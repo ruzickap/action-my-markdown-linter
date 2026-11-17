@@ -9,8 +9,9 @@ specific to this repo or easy to get wrong here.
 A **Docker-based GitHub Action** that lints Markdown files. Not a library/app.
 Execution chain: `action.yml` (`using: docker`) -> `Dockerfile` ->
 `entrypoint.sh`. The action runs `markdownlint-cli` over files discovered by
-[`fd`](https://github.com/sharkdp/fd). Published to Docker Hub as
-`peru/my-markdown-linter` and to the GitHub Marketplace.
+[`fd`](https://github.com/sharkdp/fd). Published to the GitHub Marketplace. The
+`peru/my-markdown-linter` Docker Hub image is a stale 2021 build that nothing
+here pushes to - do not advertise it.
 
 Core files:
 
@@ -28,8 +29,8 @@ Core files:
 1. **The action's linter** (shipped to users): `markdownlint-cli`, version
    pinned in `package.json` / `package-lock.json` (installed via `npm ci`).
 2. **This repo's own CI linting**: **MegaLinter**, which uses **`rumdl`** for
-   Markdown. `MARKDOWN_MARKDOWNLINT` is disabled in `.mega-linter.yml`.
-   So repo Markdown is checked by rumdl (`.rumdl.toml`), not markdownlint.
+   Markdown. `MARKDOWN_DEFAULT_STYLE: rumdl` in `.mega-linter.yml` turns
+   markdownlint off, so repo Markdown is checked by rumdl (`.rumdl.toml`).
 
 The README documents `.markdownlint.yaml` as the action's default config; there
 is no such file in this repo (users supply their own).
@@ -47,7 +48,7 @@ is no such file in this repo (users supply their own).
   `Dockerfile`, `entrypoint.sh`, `.dockerignore`, `package*.json`, `tests/**`,
   `action.yml` (`tests.yml` only), or the workflow itself changes.
 - **`docker-image` and `readme-commands-check` run on both `ubuntu-latest` and
-  `ubuntu-24.04-arm`** - keep commands/image arch-agnostic.
+  `ubuntu-26.04-arm`** - keep commands/image arch-agnostic.
 - `markdownlint-cli` in `package.json` / `package-lock.json` is
   **Renovate-managed**. Do not bump it manually.
 
