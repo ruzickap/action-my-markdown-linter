@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.5.0](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.4.0...v1.5.0) (2026-11-17)
+
+
+### Features
+
+* stop silent passes and lint all files in one run ([#134](https://github.com/ruzickap/action-my-markdown-linter/issues/134)) ([542335a](https://github.com/ruzickap/action-my-markdown-linter/commit/542335a50ba6136399c5433efdbaa358dcce12b2))
+
+
+### Bug Fixes
+
+* pin npm dependencies by hash in Dockerfile ([#130](https://github.com/ruzickap/action-my-markdown-linter/issues/130)) ([59e3bf3](https://github.com/ruzickap/action-my-markdown-linter/commit/59e3bf31bec7182273f79ba036a6d895af4a70e5))
+
 ## [1.4.0](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.3.2...v1.4.0) (2026-10-29)
 
 
