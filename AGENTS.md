@@ -9,13 +9,15 @@ specific to this repo or easy to get wrong here.
 A **Docker-based GitHub Action** that lints Markdown files. Not a library/app.
 Execution chain: `action.yml` (`using: docker`) -> `Dockerfile` ->
 `entrypoint.sh`. The action runs `markdownlint-cli` over files discovered by
-[`fd`](https://github.com/sharkdp/fd). Published to Docker Hub as
-`peru/my-markdown-linter` and to the GitHub Marketplace.
+[`fd`](https://github.com/sharkdp/fd). Published to the GitHub Marketplace. The
+`peru/my-markdown-linter` Docker Hub image is a stale 2021 build that nothing
+here pushes to - do not advertise it.
 
 Core files:
 
 - `entrypoint.sh` - all action logic. Reads `INPUT_*` env vars (set by Action
-  inputs), builds an `fd` command, pipes each result to `markdownlint`.
+  inputs), builds an `fd` command that runs `markdownlint` once on all found
+  files (`fd --exec-batch`), so fd and markdownlint errors fail the action.
 - `action.yml` - input definitions (`config_file`, `debug`, `exclude`,
   `fd_cmd_params`, `search_paths`). Keep in sync with `entrypoint.sh` + README.
 - `Dockerfile` - `node:current-alpine`; installs `bash`, `fd`, and
@@ -27,8 +29,8 @@ Core files:
 1. **The action's linter** (shipped to users): `markdownlint-cli`, version
    pinned in `package.json` / `package-lock.json` (installed via `npm ci`).
 2. **This repo's own CI linting**: **MegaLinter**, which uses **`rumdl`** for
-   Markdown. `MARKDOWN_MARKDOWNLINT` is disabled in `.mega-linter.yml`.
-   So repo Markdown is checked by rumdl (`.rumdl.toml`), not markdownlint.
+   Markdown. `MARKDOWN_DEFAULT_STYLE: rumdl` in `.mega-linter.yml` turns
+   markdownlint off, so repo Markdown is checked by rumdl (`.rumdl.toml`).
 
 The README documents `.markdownlint.yaml` as the action's default config; there
 is no such file in this repo (users supply their own).
@@ -43,20 +45,21 @@ is no such file in this repo (users supply their own).
   `chore/renovate/*` and `release-please--*` branches (see `mega-linter.yml`).
   To get a full lint pass, push to a feature branch and open a PR.
 - **`tests.yml` / `docker-image.yml` are path-filtered**: they trigger only when
-  `Dockerfile`, `entrypoint.sh`, `.dockerignore`, `tests/**`, or the workflow
-  itself changes.
+  `Dockerfile`, `entrypoint.sh`, `.dockerignore`, `package*.json`, `tests/**`,
+  `action.yml` (`tests.yml` only), or the workflow itself changes.
 - **`docker-image` and `readme-commands-check` run on both `ubuntu-latest` and
-  `ubuntu-24.04-arm`** - keep commands/image arch-agnostic.
+  `ubuntu-26.04-arm`** - keep commands/image arch-agnostic.
 - `markdownlint-cli` in `package.json` / `package-lock.json` is
   **Renovate-managed**. Do not bump it manually.
 
 ## Test fixtures
 
 `tests/test-bad-mdfile/bad.md` is intentionally broken and **must stay failing**
-for markdownlint - it proves the action detects errors. CI never runs the action
-over it directly (it is always excluded); the demo and tests show it being
-excluded. Its `<!-- markdownlint-disable -->` only neutralizes rumdl so it does
-not break this repo's own MegaLinter run. Do not "fix" this file.
+for markdownlint - Test 4 in `tests.yml` expects the action to fail on it.
+Its `<!-- rumdl-disable -->` only hides it from rumdl (this repo's MegaLinter);
+markdownlint ignores that comment. Never switch it to
+`<!-- markdownlint-disable -->`: markdownlint obeys that too, so the file would
+pass. Do not "fix" this file.
 
 ## Releases
 
@@ -68,7 +71,7 @@ manually. `CHANGELOG.md` is generated and is excluded from nearly every linter.
 ## Conventions easy to miss
 
 - `keep-sorted` blocks (`.mega-linter.yml`, `.github/workflows/stale.yml`) must
-  stay alphabetically sorted between the `keep-sorted start/end` markers.
+  stay alphabetically sorted between their `keep-sorted` start and end markers.
 - Commit subjects here allow lowercase (`CCHK_SUBJECT_CAPITALIZED: false`) and
   must be <= 72 chars; branch names must follow Conventional Branch
   (`feature/`, `bugfix/`, ...).

@@ -5,7 +5,6 @@
 [![release](https://img.shields.io/github/release/ruzickap/action-my-markdown-linter.svg)](https://github.com/ruzickap/action-my-markdown-linter/releases/latest)
 [![GitHub release date](https://img.shields.io/github/release-date/ruzickap/action-my-markdown-linter.svg)](https://github.com/ruzickap/action-my-markdown-linter/releases)
 ![GitHub Actions status](https://github.com/ruzickap/action-my-markdown-linter/workflows/docker-image/badge.svg)
-[![Docker Hub Build Status](https://img.shields.io/docker/cloud/build/peru/my-markdown-linter.svg)](https://hub.docker.com/r/peru/my-markdown-linter)
 
 This is a GitHub Action to lint Markdown files.
 It's using the [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli)
@@ -23,7 +22,7 @@ jobs:
     name: Check Markdown files
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
 
       - name: Markdown Lint
         uses: ruzickap/action-my-markdown-linter@v1
@@ -38,8 +37,8 @@ Variables used by `action-my-markdown-linter` GitHub Action:
 | `config_file`   | `.markdownlint.yaml` / `.markdownlint.yml` (if exists) | [Config file](https://github.com/igorshubovych/markdownlint-cli#configuration) used by [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli)                       |
 | `debug`         | (not defined)                                          | Enable debug mode for the [entrypoint.sh](entrypoint.sh) script (`set -x`)                                                                                                         |
 | `exclude`       | (not defined)                                          | Exclude files or directories - see the [--exclude parameter](https://github.com/sharkdp/fd#excluding-specific-files-or-directories) of [fd](https://github.com/sharkdp/fd) command |
-| `fd_cmd_params` | `. -0 --extension md --type f --hidden --no-ignore`    | Set your own parameters for [fd](https://github.com/sharkdp/fd) command. `exclude` and `search_paths` parameters are ignored if this is set.                                       |
-| `search_paths`  | (not defined)                                          | By default, all `*.md` files are checked in the whole repository, but you can specify directories                                                                                  |
+| `fd_cmd_params` | `. --extension md --type f --hidden --exclude .git/`   | Set your own parameters for [fd](https://github.com/sharkdp/fd) command. `exclude` and `search_paths` parameters are ignored if this is set.                                       |
+| `search_paths`  | (not defined)                                          | By default, all `*.md` files in the repository are checked (files ignored by `.gitignore` are skipped), but you can specify directories                                            |
 
 None of the parameters above are mandatory.
 
@@ -60,7 +59,7 @@ jobs:
     name: Check Markdown files
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
 
       - name: Markdown Lint
         uses: ruzickap/action-my-markdown-linter@v1
@@ -85,9 +84,6 @@ jobs:
 
       - name: Markdown Lint - simple example
         uses: ruzickap/action-my-markdown-linter@v1
-
-      - name: Markdown Lint using pre-built container
-        uses: docker://peru/my-markdown-linter@v1
 ```
 
 ## Examples

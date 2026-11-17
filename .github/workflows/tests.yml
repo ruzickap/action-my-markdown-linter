@@ -6,6 +6,7 @@ on:
     paths:
       - tests/**
       - .github/workflows/tests.yml
+      - action.yml
       - entrypoint.sh
       - Dockerfile
       - .dockerignore
@@ -17,6 +18,7 @@ on:
     paths:
       - tests/**
       - .github/workflows/tests.yml
+      - action.yml
       - entrypoint.sh
       - Dockerfile
       - .dockerignore
@@ -33,14 +35,16 @@ jobs:
         with:
           persist-credentials: false
 
+      # zizmor wants "uses: $/" (self-repository), but actionlint 1.7.12 rejects it:
+      # https://github.com/rhysd/actionlint/issues/711 - switch once it is supported
       - name: Test 1 - Check done in tests/test2 - tests/test2/normal.md
-        uses: ./
+        uses: ./ # zizmor: ignore[self-repository]
         with:
           debug: true
           search_paths: tests/test2
 
       - name: Test 2 - Check with "exclude" and "search_paths" - tests/test2/normal.md
-        uses: ./
+        uses: ./ # zizmor: ignore[self-repository]
         with:
           debug: true
           exclude: |
@@ -50,7 +54,30 @@ jobs:
             excluded_dir/
           search_paths: tests/
 
-      - name: Test 3 - Check with "fd_cmd_params" - tests/test2/normal.md
-        uses: ./
+      - name: Test 3 - Check with multi-line "fd_cmd_params" - tests/test2/normal.md
+        uses: ./ # zizmor: ignore[self-repository]
         with:
-          fd_cmd_params: ". -0 --extension md --type f --hidden --no-ignore --exclude CHANGELOG.md --exclude test1/excluded_file.md --exclude bad.md --exclude excluded_dir/ tests/"
+          fd_cmd_params: |
+            . -0 --extension md --type f --hidden --no-ignore
+            --exclude CHANGELOG.md --exclude test1/excluded_file.md
+            --exclude bad.md --exclude excluded_dir/ tests/
+
+      - name: Test 4 - Bad file must fail - tests/test-bad-mdfile/bad.md
+        id: test4
+        continue-on-error: true
+        uses: ./ # zizmor: ignore[self-repository]
+        with:
+          search_paths: tests/test-bad-mdfile
+
+      - name: Test 5 - File in "search_paths" must fail - tests/test2/normal.md
+        id: test5
+        continue-on-error: true
+        uses: ./ # zizmor: ignore[self-repository]
+        with:
+          search_paths: |
+            tests/test2
+            tests/test2/normal.md
+
+      - name: Check that Test 4 and Test 5 failed
+        if: steps.test4.outcome != 'failure' || steps.test5.outcome != 'failure'
+        run: exit 1
