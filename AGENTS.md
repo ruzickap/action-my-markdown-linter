@@ -44,8 +44,8 @@ is no such file in this repo (users supply their own).
   `chore/renovate/*` and `release-please--*` branches (see `mega-linter.yml`).
   To get a full lint pass, push to a feature branch and open a PR.
 - **`tests.yml` / `docker-image.yml` are path-filtered**: they trigger only when
-  `Dockerfile`, `entrypoint.sh`, `.dockerignore`, `tests/**`, or the workflow
-  itself changes.
+  `Dockerfile`, `entrypoint.sh`, `.dockerignore`, `package*.json`, `tests/**`,
+  `action.yml` (`tests.yml` only), or the workflow itself changes.
 - **`docker-image` and `readme-commands-check` run on both `ubuntu-latest` and
   `ubuntu-24.04-arm`** - keep commands/image arch-agnostic.
 - `markdownlint-cli` in `package.json` / `package-lock.json` is

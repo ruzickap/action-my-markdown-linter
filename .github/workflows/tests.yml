@@ -6,6 +6,7 @@ on:
     paths:
       - tests/**
       - .github/workflows/tests.yml
+      - action.yml
       - entrypoint.sh
       - Dockerfile
       - .dockerignore
@@ -17,6 +18,7 @@ on:
     paths:
       - tests/**
       - .github/workflows/tests.yml
+      - action.yml
       - entrypoint.sh
       - Dockerfile
       - .dockerignore
