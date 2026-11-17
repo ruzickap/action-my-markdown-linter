@@ -38,8 +38,8 @@ Variables used by `action-my-markdown-linter` GitHub Action:
 | `config_file`   | `.markdownlint.yaml` / `.markdownlint.yml` (if exists) | [Config file](https://github.com/igorshubovych/markdownlint-cli#configuration) used by [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli)                       |
 | `debug`         | (not defined)                                          | Enable debug mode for the [entrypoint.sh](entrypoint.sh) script (`set -x`)                                                                                                         |
 | `exclude`       | (not defined)                                          | Exclude files or directories - see the [--exclude parameter](https://github.com/sharkdp/fd#excluding-specific-files-or-directories) of [fd](https://github.com/sharkdp/fd) command |
-| `fd_cmd_params` | `. -0 --extension md --type f --hidden --no-ignore`    | Set your own parameters for [fd](https://github.com/sharkdp/fd) command. `exclude` and `search_paths` parameters are ignored if this is set.                                       |
-| `search_paths`  | (not defined)                                          | By default, all `*.md` files are checked in the whole repository, but you can specify directories                                                                                  |
+| `fd_cmd_params` | `. --extension md --type f --hidden --exclude .git/`   | Set your own parameters for [fd](https://github.com/sharkdp/fd) command. `exclude` and `search_paths` parameters are ignored if this is set.                                       |
+| `search_paths`  | (not defined)                                          | By default, all `*.md` files in the repository are checked (files ignored by `.gitignore` are skipped), but you can specify directories                                            |
 
 None of the parameters above are mandatory.
 

@@ -12,7 +12,7 @@ export DEBUG=${INPUT_DEBUG:-}
 export EXCLUDE=${INPUT_EXCLUDE:-}
 
 # Command line parameters for fd ("exclude" and "search_paths" parameters are ignored if this is set)
-export FD_CMD_PARAMS="${INPUT_FD_CMD_PARAMS:- . --extension md --type f --hidden --no-ignore --exclude .git/}"
+export FD_CMD_PARAMS="${INPUT_FD_CMD_PARAMS:- . --extension md --type f --hidden --exclude .git/}"
 
 # Directories which will be searched for Markdown files
 export SEARCH_PATHS=${INPUT_SEARCH_PATHS:-}
