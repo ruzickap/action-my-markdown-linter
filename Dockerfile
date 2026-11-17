@@ -4,11 +4,6 @@ LABEL maintainer="Petr Ruzicka <petr.ruzicka@gmail.com>"
 LABEL repository="https://github.com/ruzickap/action-my-markdown-linter"
 LABEL homepage="https://github.com/ruzickap/action-my-markdown-linter"
 
-LABEL "com.github.actions.name"="My Markdown Linter"
-LABEL "com.github.actions.description"="Lint Markdown files"
-LABEL "com.github.actions.icon"="list"
-LABEL "com.github.actions.color"="blue"
-
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
 COPY package.json package-lock.json /opt/app/
