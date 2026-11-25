@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "markdownlint-cli": "0.50.0"
+    "markdownlint-cli": "0.50.1"
   },
   "overrides": {
     "katex": "0.19.1",
