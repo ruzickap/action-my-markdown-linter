@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.5.0...v1.6.0) (2026-11-28)
+
+
+### Features
+
+* **deps:** update dependency markdownlint-cli to v0.50.1 ([#135](https://github.com/ruzickap/action-my-markdown-linter/issues/135)) ([f3bf943](https://github.com/ruzickap/action-my-markdown-linter/commit/f3bf943cb995f4d64c120cfdc5237eaee0bcb0f6))
+
 ## [1.5.0](https://github.com/ruzickap/action-my-markdown-linter/compare/v1.4.0...v1.5.0) (2026-11-17)
 
 
